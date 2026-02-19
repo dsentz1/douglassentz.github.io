@@ -705,20 +705,20 @@
       <div class="form-row">
         <div class="form-group">
           <label for="fname">Your Name</label>
-          <input type="text" id="fname" placeholder="Jane Smith" required>
+          <input type="text" id="fname" name="name" placeholder="Jane Smith" required>
         </div>
         <div class="form-group">
           <label for="org">Organization</label>
-          <input type="text" id="org" placeholder="School / Company">
+          <input type="text" id="org" name="organization" placeholder="School / Company">
         </div>
       </div>
       <div class="form-group">
         <label for="femail">Email Address</label>
-        <input type="email" id="femail" placeholder="jane@example.com" required>
+        <input type="email" id="femail" name="email" placeholder="jane@example.com" required>
       </div>
       <div class="form-group">
         <label for="project-type">Inquiry Type</label>
-        <select id="project-type">
+        <select id="project-type" name="inquiry_type">
           <option value="">Select an option...</option>
           <option>Curriculum Design</option>
           <option>eLearning Development</option>
@@ -729,7 +729,7 @@
       </div>
       <div class="form-group">
         <label for="message">Message</label>
-        <textarea id="message" placeholder="Tell me about your project or opportunity..."></textarea>
+        <textarea id="message" name="message" placeholder="Tell me about your project or opportunity..."></textarea>
       </div>
       <button type="submit" class="btn-primary" style="width:100%; border:none;">Send Message</button>
     </form>
