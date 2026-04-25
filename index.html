@@ -520,6 +520,7 @@
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#process">Approach</a></li>
+    <li><a href="#blooms">Bloom's</a></li>
     <li><a href="#education">Education</a></li>
     <li><a href="#portfolio">Portfolio</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -709,7 +710,153 @@
   </div>
 </section>
  
-<!-- EDUCATION -->
+<!-- BLOOMS TAXONOMY -->
+<section style="padding: 6rem 4rem; background: var(--cream);" id="blooms">
+  <div class="reveal">
+
+    <div style="margin-bottom: 1.75rem;">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.6rem;">
+        <div style="width:30px;height:1.5px;background:var(--accent);"></div>
+        <span style="font-size:0.72rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);">Interactive</span>
+      </div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:700;color:var(--ink);line-height:1.15;margin:0 0 0.5rem;">Bloom's Taxonomy</h2>
+      <p style="font-size:1rem;color:var(--muted);font-weight:300;max-width:520px;line-height:1.8;margin:0;">Click any tier of the ziggurat to explore the cognitive level, key action verbs, and a classroom example.</p>
+    </div>
+
+    <div style="max-width:680px;">
+
+      <div id="ziggurat" style="margin-bottom:5px;"></div>
+
+      <div id="blooms-detail" style="
+        background:var(--light-accent);
+        border:1px solid var(--warm);
+        border-top:3px solid var(--accent);
+        padding:1.25rem 1.5rem;
+        min-height:130px;
+      ">
+        <p style="color:var(--muted);font-size:0.88rem;text-align:center;margin:1.5rem 0;">Click a tier to explore</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  const levels = [
+    { label:"Create",     mid:"#1a1208", light:"#2e2318", dark:"#0d0904", textColor:"#e8dfd3", verbBg:"#2e231820", verbBorder:"#2e231860", verbText:"#1a1208", accentBar:"#1a1208" },
+    { label:"Evaluate",   mid:"#4a7c6f", light:"#5f9e8e", dark:"#326055", textColor:"#e1f5ee", verbBg:"#4a7c6f20", verbBorder:"#4a7c6f70", verbText:"#0f6e56", accentBar:"#4a7c6f" },
+    { label:"Analyze",    mid:"#6b8f5e", light:"#87aa72", dark:"#4e6b44", textColor:"#eaf3de", verbBg:"#6b8f5e20", verbBorder:"#6b8f5e70", verbText:"#3b6d11", accentBar:"#6b8f5e" },
+    { label:"Apply",      mid:"#a07840", light:"#c49450", dark:"#7a5a28", textColor:"#faeeda", verbBg:"#a0784020", verbBorder:"#a0784070", verbText:"#7a5a28", accentBar:"#a07840" },
+    { label:"Understand", mid:"#b86038", light:"#d07848", dark:"#8c4828", textColor:"#faece7", verbBg:"#b8603820", verbBorder:"#b8603870", verbText:"#8c4828", accentBar:"#b86038" },
+    { label:"Remember",   mid:"#c9622e", light:"#e07840", dark:"#9a4820", textColor:"#fff5f0", verbBg:"#c9622e20", verbBorder:"#c9622e70", verbText:"#9a4820", accentBar:"#c9622e" }
+  ];
+  const descs = [
+    "The highest level — learners produce something new by combining knowledge in an original way.",
+    "Learners make judgments based on criteria and standards, justifying their decisions.",
+    "Learners break material into parts, explore relationships, and identify organizational structures.",
+    "Learners use knowledge in new situations — carrying out procedures and solving problems.",
+    "Learners construct meaning from information — explaining, summarizing, and interpreting ideas.",
+    "The foundation — learners recall facts, concepts, and basic knowledge from memory."
+  ];
+  const verbs = [
+    ["design","construct","formulate","compose","plan","produce"],
+    ["assess","critique","judge","justify","argue","defend"],
+    ["compare","differentiate","examine","organize","deconstruct","infer"],
+    ["use","execute","implement","solve","demonstrate","carry out"],
+    ["explain","summarize","classify","paraphrase","interpret","describe"],
+    ["define","list","recall","identify","name","recognize"]
+  ];
+  const examples = [
+    "Design a lesson plan that incorporates UDL principles for a diverse classroom.",
+    "Evaluate two instructional strategies and argue which better supports English language learners.",
+    "Compare the causes of WWI and WWII, identifying patterns of political and economic tension.",
+    "Use the ADDIE model to outline the first two phases of an eLearning course you would build.",
+    "Explain in your own words how the British East India Company gained political power in India.",
+    "List the six levels of Bloom's Taxonomy in order from lowest to highest cognitive demand."
+  ];
+  const widths  = [28,42,55,67,80,93];
+  const heights = [44,44,44,44,44,50];
+
+  const zig    = document.getElementById('ziggurat');
+  const detail = document.getElementById('blooms-detail');
+  let activeIdx = null;
+
+  const style = document.createElement('style');
+  style.textContent = `
+    .ztier { display:flex;align-items:center;justify-content:center;cursor:pointer;margin:0 auto 5px;position:relative;transition:filter 0.15s;border:none;outline:none;background:none;padding:0; }
+    .ztier-inner { width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative; }
+    .ztier-label { font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;position:relative;z-index:2;pointer-events:none; }
+    .ztier:hover { filter:brightness(1.07); }
+    .ztier.zactive .ztier-inner { outline:3px solid #c9622e;outline-offset:-3px; }
+    .ztier .stone-svg { position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden; }
+    .bverb-pill { display:inline-block;font-size:12px;font-weight:500;padding:3px 10px;margin:3px 4px 3px 0;border-radius:3px; }
+    .bexample { background:#f2e8e0;border-radius:0 4px 4px 0;padding:0.65rem 1rem;font-size:0.82rem;font-style:italic;color:#1a1208;line-height:1.6;margin-top:0.5rem; }
+    .bmeta { font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.1em;color:#8a7d72;margin:0.75rem 0 0.4rem; }
+  `;
+  document.head.appendChild(style);
+
+  levels.forEach((lvl, i) => {
+    const btn   = document.createElement('button');
+    btn.className = 'ztier';
+    btn.style.width  = widths[i] + '%';
+    btn.style.height = heights[i] + 'px';
+
+    const inner = document.createElement('div');
+    inner.className = 'ztier-inner';
+    inner.style.cssText = `background:${lvl.mid};border-top:2px solid ${lvl.light};border-bottom:2px solid ${lvl.dark};border-left:3px solid ${lvl.dark};border-right:3px solid ${lvl.light};`;
+
+    inner.innerHTML = `
+      <div class="stone-svg">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+          <line x1="0" y1="32%" x2="100%" y2="32%" stroke="${lvl.light}" stroke-width="0.5" stroke-opacity="0.35"/>
+          <line x1="0" y1="68%" x2="100%" y2="68%" stroke="${lvl.dark}"  stroke-width="0.5" stroke-opacity="0.35"/>
+          <line x1="14%" y1="0" x2="14%" y2="100%" stroke="${lvl.dark}"  stroke-width="0.5" stroke-opacity="0.2"/>
+          <line x1="36%" y1="0" x2="36%" y2="100%" stroke="${lvl.light}" stroke-width="0.5" stroke-opacity="0.18"/>
+          <line x1="62%" y1="0" x2="62%" y2="100%" stroke="${lvl.dark}"  stroke-width="0.5" stroke-opacity="0.18"/>
+          <line x1="83%" y1="0" x2="83%" y2="100%" stroke="${lvl.light}" stroke-width="0.5" stroke-opacity="0.2"/>
+        </svg>
+      </div>
+      <span class="ztier-label" style="color:${lvl.textColor};text-shadow:0 1px 3px ${lvl.dark};">${lvl.label}</span>
+    `;
+
+    btn.appendChild(inner);
+
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.ztier').forEach(b => b.classList.remove('zactive'));
+      if (activeIdx === i) {
+        activeIdx = null;
+        detail.style.borderTopColor = 'var(--accent)';
+        detail.innerHTML = '<p style="color:var(--muted);font-size:0.88rem;text-align:center;margin:1.5rem 0;">Click a tier to explore</p>';
+        return;
+      }
+      activeIdx = i;
+      btn.classList.add('zactive');
+      detail.style.borderTopColor = lvl.accentBar;
+
+      const pills = verbs[i].map(v =>
+        `<span class="bverb-pill" style="background:${lvl.verbBg};color:${lvl.verbText};border:0.5px solid ${lvl.verbBorder};">${v}</span>`
+      ).join('');
+
+      detail.innerHTML = `
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:0.65rem;">
+          <div style="width:11px;height:11px;background:${lvl.mid};border:1.5px solid ${lvl.light};flex-shrink:0;"></div>
+          <span style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:0.1em;color:${lvl.verbText};">${lvl.label}</span>
+        </div>
+        <p style="font-size:0.9rem;color:var(--ink);line-height:1.65;margin-bottom:0.25rem;">${descs[i]}</p>
+        <p class="bmeta">Key verbs</p>
+        <div>${pills}</div>
+        <p class="bmeta">Example activity</p>
+        <div class="bexample" style="border-left:3px solid ${lvl.accentBar};">${examples[i]}</div>
+      `;
+    });
+
+    zig.appendChild(btn);
+  });
+})();
+</script>
+
+<!-- EDUCATION --><parameter name="old_str"><!-- EDUCATION -->
 <section class="education" id="education">
   <div class="reveal">
     <p class="section-label">Education and Tools</p>
