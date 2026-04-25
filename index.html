@@ -255,7 +255,18 @@
     content: '—'; position: absolute; left: 0;
     color: var(--accent); font-size: 0.7rem;
   }
- 
+  .exp-article-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    margin-top: 1.25rem;
+    font-size: 0.78rem; font-weight: 500;
+    color: var(--accent2); text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: opacity 0.2s;
+    border-bottom: 1px solid rgba(74,124,111,0.3);
+    padding-bottom: 1px;
+  }
+  .exp-article-link:hover { opacity: 0.7; }
+
   /* PROCESS */
   .process { background: var(--ink); color: var(--cream); }
   .process .section-label { color: var(--accent); }
@@ -307,15 +318,13 @@
   }
   .tool-pill:hover { border-color: var(--accent); color: var(--accent); }
  
-  /* ── PORTFOLIO SECTION ── */
+  /* PORTFOLIO SECTION */
   .portfolio { background: var(--cream); }
   .portfolio .section-title em { color: var(--accent); }
- 
   .portfolio-grid {
     display: grid; grid-template-columns: 1fr 1fr;
     gap: 2rem; margin-top: 3rem;
   }
- 
   .project-card {
     background: white; border: 1px solid var(--warm);
     border-left: 3px solid var(--accent);
@@ -326,16 +335,12 @@
     transform: translateY(-4px);
     box-shadow: 0 16px 48px rgba(26,18,8,0.09);
   }
- 
   .project-card-body { padding: 2rem; }
- 
   .project-card-top {
     display: flex; justify-content: space-between;
     align-items: flex-start; gap: 1rem; margin-bottom: 1rem;
   }
- 
   .project-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
- 
   .ptag {
     font-size: 0.68rem; font-weight: 500;
     letter-spacing: 0.1em; text-transform: uppercase;
@@ -344,7 +349,6 @@
   }
   .ptag.orange { border-color: rgba(201,98,46,0.35); color: var(--accent); background: var(--light-accent); }
   .ptag.green  { border-color: rgba(74,124,111,0.35); color: var(--accent2); background: #edf3f1; }
- 
   .project-status {
     display: flex; align-items: center; gap: 0.4rem;
     font-size: 0.7rem; font-weight: 500;
@@ -352,7 +356,6 @@
     color: var(--muted); white-space: nowrap;
   }
   .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent2); flex-shrink: 0; }
- 
   .project-title {
     font-family: 'Playfair Display', serif;
     font-size: 1.3rem; font-weight: 700;
@@ -360,16 +363,12 @@
   }
   .project-title em { font-style: italic; color: var(--accent); }
   .project-card.tech .project-title em { color: var(--accent2); }
- 
   .project-subtitle { font-size: 0.8rem; color: var(--muted); margin-bottom: 1rem; }
- 
   .project-desc {
     font-size: 0.88rem; color: var(--muted);
     line-height: 1.75; font-weight: 300; margin-bottom: 1.5rem;
   }
- 
   .project-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
- 
   .btn-sm {
     padding: 0.6rem 1.25rem; font-size: 0.78rem; font-weight: 500;
     letter-spacing: 0.06em; text-decoration: none;
@@ -382,14 +381,8 @@
   .btn-sm.filled.green-btn:hover { background: var(--accent2); border-color: var(--accent2); }
   .btn-sm.outline { background: transparent; color: var(--ink); }
   .btn-sm.outline:hover { background: var(--ink); color: var(--cream); }
- 
-  /* Embed panel */
-  .embed-panel {
-    display: none;
-    border-top: 1px solid var(--warm);
-  }
+  .embed-panel { display: none; border-top: 1px solid var(--warm); }
   .embed-panel.visible { display: block; }
- 
   .embed-toolbar {
     display: flex; align-items: center; justify-content: space-between;
     padding: 0.75rem 2rem;
@@ -416,9 +409,7 @@
     cursor: pointer; transition: color 0.2s;
   }
   .embed-close:hover { color: var(--ink); }
-  .embed-panel iframe {
-    width: 100%; height: 620px; border: none; display: block;
-  }
+  .embed-panel iframe { width: 100%; height: 620px; border: none; display: block; }
  
   /* CONTACT */
   .contact {
@@ -666,6 +657,7 @@
         <li>Delivering content through multiple modalities to maximize learner success</li>
       </ul>
     </div>
+    <!-- ✅ TEACHING FELLOW CARD — ICJS article link added below bullets -->
     <div class="exp-card green reveal">
       <div class="exp-date">2023</div>
       <div class="exp-title">Teaching Fellow</div>
@@ -674,6 +666,10 @@
         <li>Participated in interfaith education training focused on inclusive pedagogy</li>
         <li>Developed curriculum promoting interreligious understanding and dialogue</li>
       </ul>
+      <a href="https://icjs.org/resource/addressing-tough-topics/" target="_blank" class="exp-article-link">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Published: "Addressing the Tough Topics" — ICJS
+      </a>
     </div>
   </div>
 </section>
@@ -765,10 +761,7 @@
       Interactive e-learning modules built for real learners — grounded in UDL principles, Bloom's Taxonomy, and evidence-based instructional design.
     </p>
   </div>
- 
   <div class="portfolio-grid">
- 
-    <!-- Card 1: World History -->
     <div class="project-card reveal">
       <div class="project-card-body">
         <div class="project-card-top">
@@ -800,8 +793,6 @@
         <iframe id="iframe-world" src="" title="World History: The British East India Company"></iframe>
       </div>
     </div>
- 
-    <!-- Card 2: AI Prompting -->
     <div class="project-card tech reveal">
       <div class="project-card-body">
         <div class="project-card-top">
@@ -833,7 +824,6 @@
         <iframe id="iframe-ai" src="" title="AI Prompting for Educators"></iframe>
       </div>
     </div>
- 
   </div>
 </section>
  
@@ -928,7 +918,6 @@
 </footer>
  
 <script>
-  // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -936,18 +925,15 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
  
-  // Embed toggle
   function toggleEmbed(panelId, iframeId, src, btn) {
     const panel = document.getElementById(panelId);
     const iframe = document.getElementById(iframeId);
     const isOpen = panel.classList.contains('visible');
- 
     if (isOpen) {
       panel.classList.remove('visible');
       iframe.src = '';
       btn.innerHTML = '▶ Preview';
     } else {
-      // Close any other open embeds first
       document.querySelectorAll('.embed-panel.visible').forEach(p => {
         p.classList.remove('visible');
         p.querySelector('iframe').src = '';
@@ -955,7 +941,6 @@
       document.querySelectorAll('.btn-sm.filled').forEach(b => {
         if (b.innerHTML.includes('Hide')) b.innerHTML = '▶ Preview';
       });
- 
       panel.classList.add('visible');
       iframe.src = src;
       btn.innerHTML = '▼ Hide';
@@ -968,7 +953,6 @@
     const iframe = document.getElementById(iframeId);
     panel.classList.remove('visible');
     iframe.src = '';
-    // Reset the preview button in the same card
     const card = closeBtn.closest('.project-card');
     const previewBtn = card.querySelector('.btn-sm.filled');
     if (previewBtn) previewBtn.innerHTML = '▶ Preview';
@@ -976,4 +960,3 @@
 </script>
 </body>
 </html>
- 
